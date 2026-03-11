@@ -3,11 +3,13 @@ FROM node:22-alpine AS build
 
 WORKDIR /app
 
+RUN corepack enable
+
 COPY package*.json ./
-RUN npm ci
+RUN pnpm i
 
 COPY . .
-RUN npm run build
+RUN pnpm run build
 
 # ── Serve ────────────────────────────────────────────────────────────────────
 FROM nginx:alpine AS serve
