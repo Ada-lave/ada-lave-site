@@ -1,22 +1,24 @@
 ---
-const infos = [
+import SectionHeading from './SectionHeading.astro';
+import { site } from '../data/config';
+import type { ContactInfo } from '../types';
+
+const infos: ContactInfo[] = [
   {
-    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`,
+    icon:  `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`,
     label: 'Email',
-    value: 'hello@shuvalov.dev',
-    href: 'mailto:hello@shuvalov.dev',
+    value: site.email,
+    href:  `mailto:${site.email}`,
   },
   {
-    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`,
+    icon:  `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`,
     label: 'Локация',
-    value: 'Екатеринбург, RU',
-    href: null,
+    value: `${site.location}, RU`,
   },
   {
-    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>`,
+    icon:  `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>`,
     label: 'Статус',
     value: 'Не в поиске',
-    href: null,
     muted: true,
   },
 ];
@@ -24,14 +26,12 @@ const infos = [
 <section id="contact" class="py-20 lg:py-28 border-t border-[rgba(206,66,43,0.15)]">
   <div class="max-w-6xl mx-auto px-6">
 
-    <!-- Heading -->
-    <div class="mb-10">
-      <p class="font-mono text-[1.05rem] text-[#909090] mb-1">
+    <SectionHeading title="Контакты">
+      <Fragment slot="prefix">
         <span class="text-[#ce422b]">pub fn</span>
         <span class="text-[#61afef]"> get_in_touch</span><span class="text-[#909090]">()</span>
-      </p>
-      <h2 class="text-3xl lg:text-4xl font-semibold mt-1">Контакты</h2>
-    </div>
+      </Fragment>
+    </SectionHeading>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
 
@@ -56,7 +56,7 @@ const infos = [
         </div>
 
         <div>
-          <a href="https://t.me/Kitzu_Zen" target="_blank" rel="noopener noreferrer" class="btn-primary">
+          <a href={site.telegram} target="_blank" rel="noopener noreferrer" class="btn-primary">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
             Написать в Telegram
           </a>
@@ -75,9 +75,9 @@ const infos = [
         </div>
         <pre class="p-5 font-mono text-[0.8125rem] leading-7 text-[#f0f0f0] m-0 whitespace-pre overflow-x-auto"><code><span class="c-keyword">fn</span> <span class="c-fn">main</span><span class="c-bracket">()</span> <span class="c-bracket">{</span>
     <span class="c-keyword">let</span> contact <span class="c-punct">=</span> Contact <span class="c-bracket">{</span>
-        email<span class="c-punct">:</span>    <span class="c-string">"hello@shuvalov.dev"</span><span class="c-punct">,</span>
-        telegram<span class="c-punct">:</span> <span class="c-string">"@Kitzu_Zen"</span><span class="c-punct">,</span>
-        location<span class="c-punct">:</span> <span class="c-string">"Екатеринбург"</span><span class="c-punct">,</span>
+        email<span class="c-punct">:</span>    <span class="c-string">"{site.email}"</span><span class="c-punct">,</span>
+        telegram<span class="c-punct">:</span> <span class="c-string">"{site.telegramHandle}"</span><span class="c-punct">,</span>
+        location<span class="c-punct">:</span> <span class="c-string">"{site.location}"</span><span class="c-punct">,</span>
         status<span class="c-punct">:</span>   <span class="c-type">Status</span><span class="c-punct">::</span><span class="c-type">NotLooking</span><span class="c-punct">,</span>
     <span class="c-bracket">}</span><span class="c-punct">;</span>
 

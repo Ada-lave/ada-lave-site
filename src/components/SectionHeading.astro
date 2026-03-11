@@ -1,0 +1,12 @@
+---
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+<div class="mb-10">
+  <p class="font-mono text-[1.05rem] text-[#909090] mb-1">
+    <slot name="prefix" />
+  </p>
+  <h2 class="text-3xl lg:text-4xl font-semibold mt-1">{title}</h2>
+</div>

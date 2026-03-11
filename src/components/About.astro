@@ -1,43 +1,17 @@
 ---
-const traits = [
-  {
-    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>`,
-    title: 'Производительность',
-    desc: 'Оптимизирую критические пути, измеряю до и после.',
-    code: '// zero-cost abstractions',
-  },
-  {
-    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
-    title: 'Надёжность',
-    desc: 'Проектирую системы с учётом отказоустойчивости.',
-    code: '// Result<T, E>',
-  },
-  {
-    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>`,
-    title: 'Прагматизм',
-    desc: 'Выбираю простые решения, которые работают сейчас.',
-    code: '// YAGNI & KISS',
-  },
-  {
-    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>`,
-    title: 'Чистый код',
-    desc: 'Код пишется один раз, читается сотни раз.',
-    code: '// self-documenting',
-  },
-];
+import SectionHeading from './SectionHeading.astro';
+import { traits } from '../data/traits';
 ---
 <section id="about" class="py-20 lg:py-28">
   <div class="max-w-6xl mx-auto px-6">
 
-    <!-- Heading -->
-    <div class="mb-10">
-      <p class="font-mono text-[1.05rem] text-[#909090] mb-1">
+    <SectionHeading title="О себе">
+      <Fragment slot="prefix">
         <span class="text-[#ce422b]">impl</span>
         <span class="text-[#e5c07b]"> Developer</span>
         <span> &#123;</span>
-      </p>
-      <h2 class="text-3xl lg:text-4xl font-semibold mt-1">О себе</h2>
-    </div>
+      </Fragment>
+    </SectionHeading>
 
     <!-- Grid -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-10">

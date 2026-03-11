@@ -1,13 +1,14 @@
 ---
 import '../styles/global.css';
+import { site } from '../data/config';
 
 interface Props {
   title?: string;
   description?: string;
 }
 const {
-  title = 'Vladislav Shuvalov — Software Engineer',
-  description = 'Polyglot Software Engineer specializing in Go, Python, and Rust.',
+  title = site.title,
+  description = site.description,
 } = Astro.props;
 ---
 <!doctype html>

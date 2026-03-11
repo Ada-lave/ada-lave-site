@@ -1,67 +1,18 @@
 ---
-const projects = [
-  {
-    num: '01',
-    title: 'project-one',
-    description: 'Высоконагруженный микросервис с async runtime на Tokio. gRPC API, PostgreSQL, Redis кэш.',
-    tags: ['Rust', 'tokio', 'gRPC', 'PostgreSQL'],
-    github: 'https://github.com/Ada-lave',
-    accent: '#ce422b',
-  },
-  {
-    num: '02',
-    title: 'project-two',
-    description: 'REST API сервис на Go с чистой архитектурой. Gin, PostgreSQL, JWT-аутентификация.',
-    tags: ['Go', 'gin', 'JWT', 'Docker'],
-    github: 'https://github.com/Ada-lave',
-    accent: '#00acd7',
-  },
-  {
-    num: '03',
-    title: 'project-three',
-    description: 'FastAPI backend с async SQLAlchemy. Pydantic v2, Alembic миграции, Redis кэширование.',
-    tags: ['Python', 'FastAPI', 'Redis', 'k8s'],
-    github: 'https://github.com/Ada-lave',
-    accent: '#3572A5',
-  },
-  {
-    num: '04',
-    title: 'project-four',
-    description: 'CLI инструмент для автоматизации DevOps задач. Кросс-платформенный, минимум зависимостей.',
-    tags: ['Rust', 'CLI', 'Linux', 'POSIX'],
-    github: 'https://github.com/Ada-lave',
-    accent: '#ce422b',
-  },
-  {
-    num: '05',
-    title: 'project-five',
-    description: 'Distributed task queue на Go. Worker pool, retry с backoff, Prometheus метрики.',
-    tags: ['Go', 'Prometheus', 'Distributed', 'Docker'],
-    github: 'https://github.com/Ada-lave',
-    accent: '#00acd7',
-  },
-  {
-    num: '06',
-    title: 'project-six',
-    description: 'ML pipeline оркестрация. Data preprocessing, model serving, A/B тестирование.',
-    tags: ['Python', 'ML', 'FastAPI', 'PostgreSQL'],
-    github: 'https://github.com/Ada-lave',
-    accent: '#3572A5',
-  },
-];
+import SectionHeading from './SectionHeading.astro';
+import { projects } from '../data/projects';
+import { site } from '../data/config';
 ---
 <section id="projects" class="py-20 lg:py-28 border-t border-[rgba(206,66,43,0.15)]">
   <div class="max-w-6xl mx-auto px-6">
 
-    <!-- Heading -->
-    <div class="mb-10">
-      <p class="font-mono text-[1.05rem] text-[#909090] mb-1">
+    <SectionHeading title="Проекты">
+      <Fragment slot="prefix">
         <span class="text-[#ce422b]">mod</span>
         <span class="text-[#e5c07b]"> projects</span>
         <span> &#123;&#125;</span>
-      </p>
-      <h2 class="text-3xl lg:text-4xl font-semibold mt-1">Проекты</h2>
-    </div>
+      </Fragment>
+    </SectionHeading>
 
     <!-- Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
@@ -93,7 +44,7 @@ const projects = [
 
     <!-- CTA -->
     <div class="flex justify-center">
-      <a href="https://github.com/Ada-lave" target="_blank" rel="noopener noreferrer" class="btn-outline">
+      <a href={site.github} target="_blank" rel="noopener noreferrer" class="btn-outline">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
         Все репозитории на GitHub
       </a>
