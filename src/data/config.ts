@@ -3,7 +3,7 @@ import type { NavLink, SocialLink } from '../types';
 export const site = {
   title:          'Vladislav Shuvalov — Software Engineer',
   description:    'Software Engineer specializing in Go, Python, and little Rust.',
-  handle:         'vs_shuvalov',
+  handle:         'ada-lave',
   name:           'Vladislav Shuvalov',
   location:       'Екатеринбург',
   email:          'hello@shuvalov.dev',
@@ -11,7 +11,7 @@ export const site = {
   githubHandle:   'Ada-lave',
   telegram:       'https://t.me/Kitzu_Zen',
   telegramHandle: '@Kitzu_Zen',
-  stack:          ['Go', 'Rust', 'Python'] as const,
+  stack:          ['Go', 'Python', 'little Rust'] as const,
 } as const;
 
 export const nav: NavLink[] = [
