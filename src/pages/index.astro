@@ -1,11 +1,49 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Skills from '../components/Skills.astro';
+import Projects from '../components/Projects.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
 ---
 
 <Layout>
-	<Welcome />
+  <!-- Nav -->
+  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-[rgba(206,66,43,0.2)] bg-[rgba(13,13,13,0.85)] backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+      <a href="#hero" class="font-mono text-sm font-semibold text-[#f0f0f0] hover:text-[#ce422b] transition-colors">
+        <span class="text-[#ce422b]">vs</span><span class="text-[#909090]">_</span>shuvalov
+      </a>
+      <div class="hidden sm:flex items-center gap-6">
+        {[
+          { href: '#about',    label: 'about' },
+          { href: '#skills',   label: 'skills' },
+          { href: '#projects', label: 'projects' },
+          { href: '#contact',  label: 'contact' },
+        ].map(link => (
+          <a href={link.href} class="font-mono text-xs text-[#909090] hover:text-[#ce422b] transition-colors">
+            ./{link.label}
+          </a>
+        ))}
+      </div>
+      <a href="https://github.com/Ada-lave" target="_blank" rel="noopener noreferrer"
+         class="font-mono text-xs text-[#ce422b] border border-[rgba(206,66,43,0.3)] rounded px-3 py-1 hover:bg-[rgba(206,66,43,0.1)] transition-all">
+        GitHub ↗
+      </a>
+    </div>
+  </nav>
+
+  <!-- Offset for fixed nav -->
+  <div class="h-14"></div>
+
+  <main>
+    <Hero />
+    <About />
+    <Skills />
+    <Projects />
+    <Contact />
+  </main>
+
+  <Footer />
 </Layout>

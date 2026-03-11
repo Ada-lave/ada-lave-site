@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0d0d0d;
+  --color-card: #1a1a1a;
+  --color-muted: #252525;
+  --color-text: #f0f0f0;
+  --color-text-muted: #909090;
+  --color-primary: #ce422b;
+  --color-accent: #f74c00;
+  --color-secondary: #5c3d2e;
+  --color-border: rgba(206, 66, 43, 0.3);
+
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0d0d0d;
+  color: #f0f0f0;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #ce422b;
+  color: #f0f0f0;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0d0d0d; }
+::-webkit-scrollbar-thumb { background: #5c3d2e; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #ce422b; }
+
+/* Shared button styles */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 500;
+  background: #ce422b;
+  color: #f0f0f0;
+  border: 1px solid #ce422b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+.btn-primary:hover {
+  background: #f74c00;
+  border-color: #f74c00;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 500;
+  background: transparent;
+  color: #ce422b;
+  border: 1px solid rgba(206, 66, 43, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+.btn-outline:hover {
+  border-color: #ce422b;
+  background: rgba(206, 66, 43, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Code syntax */
+.c-comment { color: #5c6370; font-style: italic; }
+.c-keyword  { color: #ce422b; }
+.c-type     { color: #e5c07b; }
+.c-fn       { color: #61afef; }
+.c-string   { color: #98c379; }
+.c-macro    { color: #e5c07b; }
+.c-punct    { color: #909090; }
+.c-bracket  { color: #abb2bf; }
+
+/* Skill bar animation */
+@keyframes fillBar {
+  to { width: var(--target); }
+}
+
+.skill-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #5c3d2e, #ce422b);
+  border-radius: 2px;
+  animation: fillBar 1.2s ease forwards;
+  animation-play-state: paused;
+}
+
+/* Cursor blink */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* Scroll indicator line */
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50%       { opacity: 1;   transform: scaleY(1.2); }
+}
+
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, #ce422b, transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.scroll-indicator {
+  animation: fadeInUp 1s ease 1s both;
+}

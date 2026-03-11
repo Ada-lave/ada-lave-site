@@ -1,0 +1,164 @@
+---
+const skillGroups = [
+  {
+    label: '// Core Languages',
+    skills: [
+      { name: 'Rust',   level: 90 },
+      { name: 'Go',     level: 88 },
+      { name: 'Python', level: 85 },
+    ],
+  },
+  {
+    label: '// Backend / Frameworks',
+    skills: [
+      { name: 'tokio / actix-web',     level: 85 },
+      { name: 'gin / echo',            level: 88 },
+      { name: 'FastAPI / SQLAlchemy',  level: 82 },
+      { name: 'PostgreSQL / Redis',    level: 80 },
+    ],
+  },
+  {
+    label: '// Tooling & Infra',
+    skills: [
+      { name: 'Docker / k8s', level: 78 },
+      { name: 'Linux / Systems', level: 85 },
+      { name: 'Git / CI·CD',  level: 90 },
+    ],
+  },
+];
+---
+<section id="skills" class="py-20 lg:py-28 border-t border-[rgba(206,66,43,0.15)]">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <!-- Heading -->
+    <div class="mb-10">
+      <p class="font-mono text-[1.05rem] text-[#909090] mb-1">
+        <span class="text-[#ce422b]">use</span>
+        <span> crate</span><span class="text-[#909090]">::</span><span class="text-[#e5c07b]">skills</span><span>;</span>
+      </p>
+      <h2 class="text-3xl lg:text-4xl font-semibold mt-1">Навыки</h2>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
+
+      <!-- Skill bars -->
+      <div class="flex flex-col gap-8">
+        {skillGroups.map(group => (
+          <div class="flex flex-col gap-3">
+            <h3 class="font-mono text-sm text-[#5c6370] italic">{group.label}</h3>
+            <div class="flex flex-col gap-2.5">
+              {group.skills.map(skill => (
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="font-mono text-[0.8125rem] text-[#f0f0f0]">{skill.name}</span>
+                    <span class="font-mono text-[0.75rem] text-[#ce422b]">{skill.level}%</span>
+                  </div>
+                  <div class="h-1 bg-[#252525] rounded-full overflow-hidden">
+                    <div class="skill-fill" style={`--target: ${skill.level}%`}></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Config panel -->
+      <div class="bg-[#1a1a1a] border border-[rgba(206,66,43,0.3)] rounded overflow-hidden">
+        <div class="flex border-b border-[rgba(206,66,43,0.3)] bg-[#252525]" id="cfg-tabs">
+          <button data-file="cargo"  class="cfg-tab active-cfg px-3.5 py-2 font-mono text-xs border-r border-[rgba(206,66,43,0.3)] cursor-pointer transition-all">Cargo.toml</button>
+          <button data-file="gomod"  class="cfg-tab px-3.5 py-2 font-mono text-xs border-r border-[rgba(206,66,43,0.3)] cursor-pointer transition-all text-[#909090] hover:text-[#f0f0f0]">go.mod</button>
+          <button data-file="pip"    class="cfg-tab px-3.5 py-2 font-mono text-xs cursor-pointer transition-all text-[#909090] hover:text-[#f0f0f0]">requirements.txt</button>
+        </div>
+
+        <div class="p-5">
+          <pre id="cfg-cargo" class="cfg-panel font-mono text-[0.8125rem] leading-7 text-[#f0f0f0] m-0 whitespace-pre overflow-x-auto"><code><span class="c-bracket">[</span><span class="c-type">package</span><span class="c-bracket">]</span>
+name    = <span class="c-string">"shuvalov-dev"</span>
+version = <span class="c-string">"1.0.0"</span>
+edition = <span class="c-string">"2021"</span>
+
+<span class="c-bracket">[</span><span class="c-type">dependencies</span><span class="c-bracket">]</span>
+tokio     = <span class="c-bracket">{</span> version = <span class="c-string">"1"</span>, features = <span class="c-bracket">[</span><span class="c-string">"full"</span><span class="c-bracket">]</span> <span class="c-bracket">}</span>
+actix-web = <span class="c-string">"4"</span>
+serde     = <span class="c-bracket">{</span> version = <span class="c-string">"1"</span>, features = <span class="c-bracket">[</span><span class="c-string">"derive"</span><span class="c-bracket">]</span> <span class="c-bracket">}</span>
+sqlx      = <span class="c-bracket">{</span> version = <span class="c-string">"0.8"</span>, features = <span class="c-bracket">[</span><span class="c-string">"postgres"</span><span class="c-bracket">]</span> <span class="c-bracket">}</span>
+redis     = <span class="c-string">"0.26"</span>
+tracing   = <span class="c-string">"0.1"</span>
+
+<span class="c-bracket">[</span><span class="c-type">profile.release</span><span class="c-bracket">]</span>
+opt-level = <span class="c-macro">3</span>
+lto       = <span class="c-string">"fat"</span></code></pre>
+
+          <pre id="cfg-gomod" class="cfg-panel hidden font-mono text-[0.8125rem] leading-7 text-[#f0f0f0] m-0 whitespace-pre overflow-x-auto"><code>module github.com/ada-lave/service
+
+go <span class="c-macro">1.23</span>
+
+require <span class="c-bracket">(</span>
+    github.com/gin-gonic/gin       <span class="c-string">v1.10.0</span>
+    github.com/labstack/echo/v4    <span class="c-string">v4.13.0</span>
+    github.com/jackc/pgx/v5        <span class="c-string">v5.7.0</span>
+    github.com/redis/go-redis/v9   <span class="c-string">v9.7.0</span>
+    go.uber.org/zap                <span class="c-string">v1.27.0</span>
+    golang.org/x/sync              <span class="c-string">v0.10.0</span>
+<span class="c-bracket">)</span></code></pre>
+
+          <pre id="cfg-pip" class="cfg-panel hidden font-mono text-[0.8125rem] leading-7 text-[#f0f0f0] m-0 whitespace-pre overflow-x-auto"><code><span class="c-comment"># requirements.txt</span>
+fastapi[all]<span class="c-punct">==</span><span class="c-macro">0.115.5</span>
+uvicorn[standard]<span class="c-punct">==</span><span class="c-macro">0.32.0</span>
+sqlalchemy[asyncio]<span class="c-punct">==</span><span class="c-macro">2.0.36</span>
+asyncpg<span class="c-punct">==</span><span class="c-macro">0.30.0</span>
+redis<span class="c-punct">==</span><span class="c-macro">5.2.0</span>
+pydantic<span class="c-punct">==</span><span class="c-macro">2.10.0</span>
+httpx<span class="c-punct">==</span><span class="c-macro">0.28.0</span>
+structlog<span class="c-punct">==</span><span class="c-macro">24.4.0</span>
+alembic<span class="c-punct">==</span><span class="c-macro">1.14.0</span>
+
+<span class="c-comment"># Dev</span>
+pytest<span class="c-punct">==</span><span class="c-macro">8.3.0</span>
+ruff<span class="c-punct">==</span><span class="c-macro">0.8.0</span></code></pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .active-cfg {
+    color: #ce422b;
+    background: rgba(206, 66, 43, 0.08);
+  }
+</style>
+
+<script>
+  // Config tabs
+  const cfgTabs = document.querySelectorAll<HTMLButtonElement>('#cfg-tabs .cfg-tab');
+  const cfgPanels = document.querySelectorAll<HTMLElement>('.cfg-panel');
+
+  cfgTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const file = tab.dataset.file as string;
+      cfgTabs.forEach(t => {
+        t.classList.remove('active-cfg');
+        if (!t.classList.contains('text-[#909090]')) t.classList.add('text-[#909090]');
+      });
+      tab.classList.add('active-cfg');
+      tab.classList.remove('text-[#909090]');
+
+      cfgPanels.forEach(p => p.classList.add('hidden'));
+      const target = document.getElementById(`cfg-${file}`);
+      if (target) target.classList.remove('hidden');
+    });
+  });
+
+  // Animate bars on scroll
+  const fills = document.querySelectorAll<HTMLElement>('.skill-fill');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        (entry.target as HTMLElement).style.animationPlayState = 'running';
+      }
+    });
+  }, { threshold: 0.2 });
+  fills.forEach(fill => observer.observe(fill));
+</script>
