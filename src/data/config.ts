@@ -6,7 +6,7 @@ export const site = {
   handle:         'ada-lave',
   name:           'Vladislav Shuvalov',
   location:       'Екатеринбург',
-  email:          'hello@shuvalov.dev',
+  email:          'mega.kefi36@icloud.com',
   github:         'https://github.com/Ada-lave',
   githubHandle:   'Ada-lave',
   telegram:       'https://t.me/Kitzu_Zen',
