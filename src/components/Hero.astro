@@ -1,5 +1,11 @@
 ---
 import { site, socials } from '../data/config';
+import type { Translations } from '../i18n/types';
+
+interface Props {
+  t: Translations['hero'];
+}
+const { t } = Astro.props;
 ---
 <section id="hero" class="min-h-dvh flex flex-col items-center justify-center relative border-b border-[rgba(206,66,43,0.3)]">
   <div class="max-w-6xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center py-12">
@@ -23,8 +29,7 @@ import { site, socials } from '../data/config';
 
       <!-- Subtitle -->
       <p class="text-[#909090] text-base leading-relaxed mb-8">
-        Software Engineer.<br />
-        Crafting reliable systems in
+        <Fragment set:html={t.subtitle} /><br />
         {site.stack.map((lang, i) => (
           <>
             <span class="text-[#ce422b] font-mono">{lang}</span>{i < site.stack.length - 1 ? (i === site.stack.length - 2 ? ' & ' : ', ') : '.'}
@@ -36,9 +41,9 @@ import { site, socials } from '../data/config';
       <div class="flex flex-wrap gap-3 mb-8">
         <a href="#projects" class="btn-primary">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-          Проекты
+          {t.ctaProjects}
         </a>
-        <a href="#contact" class="btn-outline">Связаться</a>
+        <a href="#contact" class="btn-outline">{t.ctaContact}</a>
       </div>
 
       <!-- Socials -->
@@ -156,7 +161,7 @@ import { site, socials } from '../data/config';
 
   <!-- Scroll indicator -->
   <div class="scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-    <span class="font-mono text-[0.6875rem] text-[#909090] uppercase tracking-widest">scroll</span>
+    <span class="font-mono text-[0.6875rem] text-[#909090] uppercase tracking-widest">{t.scroll}</span>
     <div class="scroll-line"></div>
   </div>
 </section>

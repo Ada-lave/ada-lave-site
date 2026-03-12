@@ -1,11 +1,16 @@
 ---
 import SectionHeading from './SectionHeading.astro';
-import { traits } from '../data/traits';
+import type { Translations } from '../i18n/types';
+
+interface Props {
+  t: Translations['about'];
+}
+const { t } = Astro.props;
 ---
 <section id="about" class="py-20 lg:py-28">
   <div class="max-w-6xl mx-auto px-6">
 
-    <SectionHeading title="О себе">
+    <SectionHeading title={t.title}>
       <Fragment slot="prefix">
         <span class="text-[#ce422b]">impl</span>
         <span class="text-[#e5c07b]"> Developer</span>
@@ -17,25 +22,18 @@ import { traits } from '../data/traits';
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-10">
       <!-- Text -->
       <div class="flex flex-col gap-4 text-[#909090] text-[0.9375rem] leading-relaxed">
-        <p>
-          Разрабатываю высоконагруженные backend-сервисы и системы. Мой подход — выбирать правильный инструмент под задачу:
-          <code class="font-mono text-[0.875em] text-[#ce422b] bg-[rgba(206,66,43,0.1)] px-1.5 py-0.5 rounded-sm">Go</code> для конкурентных микросервисов,
-          <code class="font-mono text-[0.875em] text-[#ce422b] bg-[rgba(206,66,43,0.1)] px-1.5 py-0.5 rounded-sm">Rust</code> там, где важна производительность и безопасность памяти,
-          <code class="font-mono text-[0.875em] text-[#ce422b] bg-[rgba(206,66,43,0.1)] px-1.5 py-0.5 rounded-sm">Python</code> для прототипирования и автоматизации.
-        </p>
-        <p>
-          Ценю простоту архитектуры, читаемость кода и предсказуемое поведение систем в продакшне. Работаю с распределёнными системами, контейнеризацией и облачными платформами.
-        </p>
+        <p set:html={t.p1Html} />
+        <p>{t.p2}</p>
       </div>
 
       <!-- Trait cards -->
       <div class="grid grid-cols-2 gap-3">
-        {traits.map(t => (
+        {t.traits.map(tr => (
           <div class="bg-[#1a1a1a] border border-[rgba(206,66,43,0.3)] rounded p-4 flex flex-col gap-2 hover:border-[#ce422b] hover:-translate-y-0.5 transition-all">
-            <div class="text-[#ce422b]" set:html={t.icon} />
-            <h3 class="text-[0.9375rem] font-semibold">{t.title}</h3>
-            <p class="text-[0.8125rem] text-[#909090] leading-snug">{t.desc}</p>
-            <span class="font-mono text-[0.75rem] text-[#5c6370] italic">{t.code}</span>
+            <div class="text-[#ce422b]" set:html={tr.icon} />
+            <h3 class="text-[0.9375rem] font-semibold">{tr.title}</h3>
+            <p class="text-[0.8125rem] text-[#909090] leading-snug">{tr.desc}</p>
+            <span class="font-mono text-[0.75rem] text-[#5c6370] italic">{tr.code}</span>
           </div>
         ))}
       </div>

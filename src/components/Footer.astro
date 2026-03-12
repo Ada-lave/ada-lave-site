@@ -1,5 +1,11 @@
 ---
 import { site } from '../data/config';
+import type { Translations } from '../i18n/types';
+
+interface Props {
+  t: Translations['footer'];
+}
+const { t } = Astro.props;
 const year = new Date().getFullYear();
 ---
 <footer class="border-t border-[rgba(206,66,43,0.3)] py-8">
@@ -13,7 +19,7 @@ const year = new Date().getFullYear();
     </div>
 
     <p class="font-mono text-[0.75rem] text-[#5c6370]">
-      © {year} {site.name}. Built with Astro &amp; Tailwind.
+      © {year} {site.name}. {t.builtWith}
     </p>
 
   </div>

@@ -1,18 +1,21 @@
 ---
 import '../styles/global.css';
 import { site } from '../data/config';
+import type { Lang } from '../i18n/types';
 
 interface Props {
   title?: string;
   description?: string;
+  lang?: Lang;
 }
 const {
   title = site.title,
   description = site.description,
+  lang = 'ru',
 } = Astro.props;
 ---
 <!doctype html>
-<html lang="ru">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
