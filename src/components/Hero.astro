@@ -39,11 +39,11 @@ const { t } = Astro.props;
 
       <!-- CTA buttons -->
       <div class="flex flex-wrap gap-3 mb-8">
-        <a href="#projects" class="btn-primary">
+        <a href="#projects" class="btn-primary" data-umami-event="hero-cta-projects">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
           {t.ctaProjects}
         </a>
-        <a href="#contact" class="btn-outline">{t.ctaContact}</a>
+        <a href="#contact" class="btn-outline" data-umami-event="hero-cta-contact">{t.ctaContact}</a>
       </div>
 
       <!-- Socials -->
@@ -52,7 +52,8 @@ const { t } = Astro.props;
           <a href={s.href}
              target={s.href.startsWith('mailto:') ? undefined : '_blank'}
              rel={s.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-             class="flex items-center gap-1.5 font-mono text-[0.8125rem] text-[#909090] hover:text-[#ce422b] transition-colors">
+             class="flex items-center gap-1.5 font-mono text-[0.8125rem] text-[#909090] hover:text-[#ce422b] transition-colors"
+             data-umami-event={`social-${s.label.toLowerCase()}`}>
             <span set:html={s.icon} />
             {s.label}
           </a>
