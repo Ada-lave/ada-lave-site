@@ -30,11 +30,11 @@ export const ru: Translations = {
 
   about: {
     title: 'О себе',
-    p1Html: `Разрабатываю высоконагруженные backend-сервисы и системы. Мой подход — выбирать правильный инструмент под задачу:
+    p1Html: `Работают над backend-сервисами и системами. Мой подход — выбирать правильный инструмент под задачу:
       ${codeTag('Go')} для конкурентных микросервисов,
       ${codeTag('Rust')} там, где важна производительность и безопасность памяти,
       ${codeTag('Python')} для прототипирования и автоматизации.`,
-    p2: 'Ценю простоту архитектуры, читаемость кода и предсказуемое поведение систем в продакшне. Работаю с распределёнными системами, контейнеризацией и облачными платформами.',
+    p2: 'Ценю простоту архитектуры, читаемость кода. Фанатею по Rust, AI local и self-hosted.',
     traits: [
       {
         icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>`,
@@ -51,14 +51,14 @@ export const ru: Translations = {
       {
         icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>`,
         title: 'Прагматизм',
-        desc:  'Выбираю простые решения, которые работают сейчас.',
+        desc:  'Выбираю простые решения, которые работают сейчас и желательно, что бы не сломались когда-то потом ;)',
         code:  '// YAGNI & KISS',
       },
       {
         icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>`,
-        title: 'Чистый код',
-        desc:  'Код пишется один раз, читается сотни раз.',
-        code:  '// self-documenting',
+        title: 'Open Source',
+        desc:  'Обожаю open source и self-hosted, собвестенно и сам стараюсь поддерживать проекты.',
+        code:  '// open source',
       },
     ],
   },
@@ -77,18 +77,26 @@ export const ru: Translations = {
       {
         label: '// Backend / Frameworks',
         skills: [
-          { name: 'tokio / actix-web',    level: 85 },
-          { name: 'gin / echo',           level: 88 },
-          { name: 'FastAPI / SQLAlchemy', level: 82 },
-          { name: 'PostgreSQL / Redis',   level: 80 },
+          { name: 'FastAPI / SQLAlchemy / drm', level: 82 },
+          { name: 'PostgreSQL',   level: 65 },
+          { name: 'Redis',   level: 80 },
+          { name: 'ElasticSearch', level: 85 }
         ],
       },
       {
         label: '// Tooling & Infra',
         skills: [
-          { name: 'Docker / k8s',    level: 78 },
-          { name: 'Linux / Systems', level: 85 },
-          { name: 'Git / CI·CD',     level: 90 },
+          { name: 'Docker / k8s / ArgoCD / Gitlab',    level: 78 },
+          { name: 'Linux / Windows / MacOS', level: 85 },
+        ],
+      },
+      {
+        label: '// Self Hosting',
+        skills: [
+          { name: 'Dokku / Docker',    level: 60 },
+          { name: 'Caddy / NGINX', level: 60 },
+          { name: 'Ollama / MLStudio / AnythingLLM', level: 70 },
+          { name: 'Xray / Remnawave', level: 50 }
         ],
       },
     ],
@@ -127,6 +135,6 @@ export const ru: Translations = {
   },
 
   footer: {
-    builtWith: 'Built with Astro & Tailwind.',
+    builtWith: 'Built with Astro & Tailwind. Deployed using Dokku.',
   },
 };
