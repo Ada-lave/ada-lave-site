@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { site } from '../data/config';
 import type { Lang } from '../i18n/types';
+import RadioPlayer from '../components/RadioPlayer.astro';
 
 interface Props {
   title?: string;
@@ -42,5 +43,6 @@ const umamiWebsiteId  = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
   </head>
   <body>
     <slot />
+    <RadioPlayer />
   </body>
 </html>

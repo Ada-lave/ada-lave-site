@@ -1,0 +1,77 @@
+---
+// Lo-fi radio — floating player
+const STREAM = 'https://stream.laut.fm/lofi';
+---
+
+<div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
+
+  <!-- "now playing" label -->
+  <div id="radio-label"
+       class="hidden items-center gap-1.5 font-mono text-[0.6875rem] text-[#ce422b]
+              bg-[#1a1a1a] border border-[rgba(206,66,43,0.3)] rounded px-2.5 py-1">
+    <span class="radio-dot w-1.5 h-1.5 rounded-full bg-[#ce422b]"></span>
+    lo-fi radio
+  </div>
+
+  <!-- play / pause button -->
+  <button id="radio-btn"
+          aria-label="Play lo-fi radio"
+          data-umami-event="radio-toggle"
+          class="w-11 h-11 flex items-center justify-center rounded-full
+                 bg-[#1a1a1a] border border-[rgba(206,66,43,0.3)]
+                 text-[#909090] hover:text-[#ce422b] hover:border-[#ce422b]
+                 transition-all shadow-lg">
+    <!-- play icon -->
+    <svg id="icon-play" width="16" height="16" viewBox="0 0 24 24"
+         fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    <!-- pause icon (hidden) -->
+    <svg id="icon-pause" width="16" height="16" viewBox="0 0 24 24"
+         fill="currentColor" class="hidden">
+      <rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>
+    </svg>
+  </button>
+
+</div>
+
+<audio id="radio-audio" preload="none" src={STREAM} data-src={STREAM}></audio>
+
+<style>
+  .radio-dot {
+    animation: pulse-dot 1.4s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.3; }
+  }
+</style>
+
+<script>
+  const audio   = document.getElementById('radio-audio')  as HTMLAudioElement;
+  const btn     = document.getElementById('radio-btn')!;
+  const label   = document.getElementById('radio-label')!;
+  const iconPlay  = document.getElementById('icon-play')!;
+  const iconPause = document.getElementById('icon-pause')!;
+
+  let playing = false;
+
+  btn.addEventListener('click', () => {
+    if (playing) {
+      audio.pause();
+      audio.src = '';          // освобождаем буфер
+      setPlaying(false);
+    } else {
+      audio.src = audio.dataset.src!;
+      audio.play().catch(() => setPlaying(false));
+      setPlaying(true);
+    }
+  });
+
+  function setPlaying(state: boolean) {
+    playing = state;
+    iconPlay.classList.toggle('hidden', state);
+    iconPause.classList.toggle('hidden', !state);
+    label.classList.toggle('hidden', !state);
+    label.classList.toggle('flex', state);
+    btn.setAttribute('aria-label', state ? 'Pause lo-fi radio' : 'Play lo-fi radio');
+  }
+</script>
