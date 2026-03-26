@@ -9,6 +9,7 @@ export const site = {
   email:          'mega.kefi36@icloud.com',
   github:         'https://github.com/Ada-lave',
   githubHandle:   'Ada-lave',
+  codetimeBadge:  'https://shields.jannchie.com/endpoint?style=for-the-badge&color=222&url=https%3A%2F%2Fapi.codetime.dev%2Fv3%2Fusers%2Fshield%3Fuid%3D19889',
   telegram:       'https://t.me/Kitzu_Zen',
   telegramHandle: '@Kitzu_Zen',
   stack:          ['Go', 'Python', 'little Rust'] as const,
