@@ -68,18 +68,27 @@ export const en: Translations = {
       {
         label: '// Core Languages',
         skills: [
-          { name: 'Rust',   level: 20 },
+          { name: 'Rust',   level: 65 },
           { name: 'Go',     level: 70 },
           { name: 'Python', level: 80 },
         ],
       },
       {
-        label: '// Backend / Frameworks',
+        label: '// Backend',
         skills: [
-          { name: 'FastAPI / SQLAlchemy / drm', level: 82 },
-          { name: 'PostgreSQL',                 level: 65 },
-          { name: 'Redis',                      level: 80 },
-          { name: 'ElasticSearch',              level: 85 },
+          { name: 'FastAPI', level: 82 },
+          { name: 'Django',  level: 80 },
+          { name: 'sqlc',    level: 70 },
+          { name: 'goose', level: 50 },
+          { name: 'atlas', level: 50 },
+        ],
+      },
+      {
+        label: '// DB',
+        skills: [
+          { name: 'PostgreSQL',  level: 65 },
+          { name: 'Redis',       level: 80 },
+          { name: 'ElasticSearch', level: 85 },
         ],
       },
       {
@@ -98,6 +107,14 @@ export const en: Translations = {
           { name: 'Xray / Remnawave',                  level: 50 },
         ],
       },
+      {
+        label: '// Mesh',
+        skills: [
+          { name: 'LoRa', level: 70 },
+          { name: 'Meshcore', level: 70 },
+          { name: 'Meshtastic', level: 60 }
+        ]
+      }
     ],
   },
 

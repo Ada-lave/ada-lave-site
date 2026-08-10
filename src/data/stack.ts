@@ -7,7 +7,7 @@ export const configTabs: ConfigTab[] = [
 ];
 
 export const cargo = {
-  pkg: { name: 'shuvalov-dev', version: '1.0.0', edition: '2021' },
+  pkg: { name: 'shuvalov-dev', version: '1.0.0', edition: '2005' },
   deps: [
     { name: 'tokio',     version: '1',   features: ['full']     },
     { name: 'actix-web', version: '4'                           },
@@ -16,7 +16,7 @@ export const cargo = {
     { name: 'redis',     version: '0.26'                        },
     { name: 'tracing',   version: '0.1'                         },
   ] as CargoDep[],
-  profile: { optLevel: 3, lto: 'fat' },
+  profile: { optLevel: 3, lto: 'thin' },
 };
 
 export const goMod = {
