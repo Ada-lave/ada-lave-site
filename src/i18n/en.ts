@@ -114,6 +114,15 @@ export const en: Translations = {
           { name: 'Meshcore', level: 70 },
           { name: 'Meshtastic', level: 60 }
         ]
+      },
+      {
+        label: '// Embedded',
+        skills: [
+          { name: 'esp-hal', level: 65 },
+          { name: 'embedded-hal', level: 65 },
+          { name: 'esp32', level: 65 },
+          { name: 'esp32h2', level: 65 }
+        ]
       }
     ],
   },
@@ -132,10 +141,10 @@ export const en: Translations = {
       },
       {
         num:         '02',
-        title:       'summia',
-        description: 'My personal experiments with audio recording and transcription',
-        tags:        ['Rust', 'cpal', 'desktop', 'AI', 'local'],
-        github:      'https://github.com/Ada-lave/summia',
+        title:       'weact-epaper-154-rs',
+        description: 'Experimental Rust driver for a 1.54-inch four-color e-paper display',
+        tags:        ['Rust', 'embedded-hal', 'embedded-graphics', 'e-paper'],
+        github:      'https://github.com/Ada-lave/weact-epaper-154-rs',
         accent:      '#ce422b',
       },
     ],
