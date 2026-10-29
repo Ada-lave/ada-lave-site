@@ -159,6 +159,11 @@ export const ru: Translations = {
     ],
   },
 
+  homelab: {
+    title: 'Homelab',
+    description: 'Сервисы, которые я размещаю в своём Homelab.',
+  },
+
   contact: {
     title: 'Контакты',
     locationLabel: 'Локация',

@@ -158,6 +158,11 @@ export const en: Translations = {
     ],
   },
 
+  homelab: {
+    title: 'Homelab',
+    description: 'Services I run in my homelab.',
+  },
+
   contact: {
     title:         'Contact',
     locationLabel: 'Location',

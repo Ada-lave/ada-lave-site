@@ -1,13 +1,16 @@
 ---
 import SectionHeading from './SectionHeading.astro';
+import Homelab from './Homelab.astro';
 import { configTabs, cargo, goMod, pip } from '../data/stack';
 import type { CargoDep, GoDep, PipDep } from '../types';
-import type { Translations } from '../i18n/types';
+import type { Lang, Translations } from '../i18n/types';
 
 interface Props {
   t: Translations['skills'];
+  homelabT: Translations['homelab'];
+  lang: Lang;
 }
-const { t } = Astro.props;
+const { t, homelabT, lang } = Astro.props;
 
 // ── Cargo.toml ──────────────────────────────────────────────────────────────
 const cargoMaxLen = Math.max(...cargo.deps.map(d => d.name.length));
@@ -133,6 +136,8 @@ const panelHtml: Record<string, string> = {
       </div>
 
     </div>
+
+    <Homelab t={homelabT} lang={lang} />
   </div>
 </section>
 

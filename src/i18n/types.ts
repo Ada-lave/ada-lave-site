@@ -32,6 +32,10 @@ export interface Translations {
     cta: string;
     list: Project[];
   };
+  homelab: {
+    title: string;
+    description: string;
+  };
   contact: {
     title: string;
     locationLabel: string;

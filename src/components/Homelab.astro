@@ -1,0 +1,25 @@
+---
+import { homelab } from '../data/homelab';
+import type { Lang, Translations } from '../i18n/types';
+const { t, lang } = Astro.props as { t: Translations['homelab']; lang: Lang };
+---
+<div id="homelab" class="mt-12 lg:mt-16 pt-10 border-t border-[rgba(206,66,43,0.15)]">
+    <h3 class="text-2xl font-semibold mb-4">{t.title}</h3>
+    <p class="text-[#909090] leading-relaxed mb-8">{t.description}</p>
+    <ul class="homelab-list" role="list">
+      {homelab.map(service => (
+        <li>
+          <h4>{service.name}</h4>
+          {'description' in service && <p>{service.description[lang]}</p>}
+        </li>
+      ))}
+    </ul>
+</div>
+<style>
+  .homelab-list { display: grid; grid-template-columns: minmax(0, 1fr); column-gap: 2rem; }
+  li { border-top: 1px solid var(--color-muted); padding: 1.25rem 0; }
+  h4 { font-family: var(--font-mono); font-size: 0.9375rem; font-weight: 500; color: var(--color-text); }
+  p { color: var(--color-text-muted); font-size: 0.875rem; margin-top: 0.375rem; }
+  @media (min-width: 640px) { .homelab-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1024px) { .homelab-list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+</style>
