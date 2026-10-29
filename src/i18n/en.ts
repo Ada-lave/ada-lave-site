@@ -147,6 +147,14 @@ export const en: Translations = {
         github:      'https://github.com/Ada-lave/weact-epaper-154-rs',
         accent:      '#ce422b',
       },
+      {
+        num: '03',
+        title: 'btyper',
+        description: 'Adaptive touch-typing practice in your terminal, with English and Russian lessons, weak-key training, and local progress tracking.',
+        tags: ['Go', 'TUI', 'typing', 'offline'],
+        github: 'https://github.com/Ada-lave/btyper',
+        accent: '#ce422b',
+      },
     ],
   },
 

@@ -148,6 +148,14 @@ export const ru: Translations = {
         github: 'https://github.com/Ada-lave/weact-epaper-154-rs',
         accent: '#ce422b',
       },
+      {
+        num: '03',
+        title: 'btyper',
+        description: 'Адаптивный тренажёр слепой печати в терминале: упражнения на русском и английском, работа над слабыми буквами и отслеживание прогресса.',
+        tags: ['Go', 'TUI', 'typing', 'offline'],
+        github: 'https://github.com/Ada-lave/btyper',
+        accent: '#ce422b',
+      },
     ],
   },
 
