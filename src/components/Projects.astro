@@ -13,20 +13,21 @@ const { t } = Astro.props;
 
     <SectionHeading title={t.title}>
       <Fragment slot="prefix">
-        <span class="text-[#ce422b]">mod</span>
+        <span class="text-primary">mod</span>
         <span class="text-[#e5c07b]"> projects</span>
         <span> &#123;&#125;</span>
       </Fragment>
     </SectionHeading>
 
     <!-- Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
       {t.list.map(p => (
-        <article class="bg-[#1a1a1a] border border-[rgba(206,66,43,0.3)] rounded p-5 flex flex-col gap-3 hover:border-[#ce422b] hover:-translate-y-1 transition-all">
-          <div class="flex justify-between items-center" style={`border-left: 3px solid ${p.accent}; padding-left: 0.625rem`}>
-            <span class="font-mono text-xs text-[#5c6370] italic">// {p.num}</span>
+        <article class="bg-[#1a1a1a] border border-[rgba(206,66,43,0.3)] rounded p-5 flex flex-col gap-3 hover:border-[#ce422b] transition-all">
+          <div class="flex justify-between items-center">
+            <span class="font-mono text-xs text-[#a0a6b1]">GitHub</span>
             <a href={p.github} target="_blank" rel="noopener noreferrer"
-               class="text-[#909090] hover:text-[#ce422b] transition-colors"
+               aria-label={`${p.title} — GitHub`}
+               class="inline-flex w-11 h-11 items-center justify-center text-[#909090] hover:text-primary transition-colors"
                data-umami-event={`project-github-${p.title.toLowerCase()}`}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
             </a>
@@ -34,14 +35,14 @@ const { t } = Astro.props;
 
           <div class="flex-1">
             <h3 class="font-mono text-[0.9375rem] font-medium mb-1.5">
-              <span class="text-[#ce422b]">fn </span>{p.title}<span class="text-[#909090]">()</span>
+              <a href={p.github} target="_blank" rel="noopener noreferrer" class="hover:text-primary">{p.title}</a>
             </h3>
             <p class="text-[0.8125rem] text-[#909090] leading-relaxed">{p.description}</p>
           </div>
 
           <div class="flex flex-wrap gap-1.5">
             {p.tags.map(tag => (
-              <span class="font-mono text-[0.6875rem] text-[#ce422b] bg-[rgba(206,66,43,0.1)] border border-[rgba(206,66,43,0.2)] rounded-sm px-2 py-0.5">{tag}</span>
+              <span class="font-mono text-[0.6875rem] text-primary bg-[rgba(206,66,43,0.1)] border border-[rgba(206,66,43,0.2)] rounded-sm px-2 py-0.5">{tag}</span>
             ))}
           </div>
         </article>

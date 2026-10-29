@@ -1,12 +1,12 @@
 import type { Translations } from './types';
 
 const codeTag = (text: string) =>
-  `<code class="font-mono text-[0.875em] text-[#ce422b] bg-[rgba(206,66,43,0.1)] px-1.5 py-0.5 rounded-sm">${text}</code>`;
+  `<code class="font-mono text-[0.875em] text-primary bg-[rgba(206,66,43,0.1)] px-1.5 py-0.5 rounded-sm">${text}</code>`;
 
 export const en: Translations = {
   lang: 'en',
   langSwitch: 'RU',
-  langSwitchHref: '/',
+  langSwitchHref: '/?lang=ru',
 
   meta: {
     title: 'Vladislav Shuvalov — Software Engineer',

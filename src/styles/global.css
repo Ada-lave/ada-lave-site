@@ -6,8 +6,8 @@
   --color-muted: #252525;
   --color-text: #f0f0f0;
   --color-text-muted: #909090;
-  --color-primary: #ce422b;
-  --color-accent: #f74c00;
+  --color-primary: #ef826b;
+  --color-accent: #ff9b77;
   --color-secondary: #5c3d2e;
   --color-border: rgba(206, 66, 43, 0.3);
 
@@ -24,17 +24,17 @@ html {
 }
 
 body {
-  background-color: #0d0d0d;
-  color: #f0f0f0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  margin: 0;
 }
 
 ::selection {
-  background: #ce422b;
-  color: #f0f0f0;
+  background: #b93620;
+  color: #fff;
 }
 
 ::-webkit-scrollbar { width: 6px; }
@@ -52,16 +52,16 @@ body {
   font-family: var(--font-mono);
   font-size: 0.875rem;
   font-weight: 500;
-  background: #ce422b;
-  color: #f0f0f0;
-  border: 1px solid #ce422b;
+  background: #b93620;
+  color: #fff;
+  border: 1px solid #b93620;
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
 }
 .btn-primary:hover {
-  background: #f74c00;
-  border-color: #f74c00;
+  background: #b93620;
+  border-color: #b93620;
   transform: translateY(-1px);
 }
 
@@ -75,21 +75,21 @@ body {
   font-size: 0.875rem;
   font-weight: 500;
   background: transparent;
-  color: #ce422b;
+  color: var(--color-primary);
   border: 1px solid rgba(206, 66, 43, 0.3);
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
 }
 .btn-outline:hover {
-  border-color: #ce422b;
+  border-color: var(--color-primary);
   background: rgba(206, 66, 43, 0.1);
   transform: translateY(-1px);
 }
 
 /* Code syntax */
-.c-comment { color: #5c6370; font-style: italic; }
-.c-keyword  { color: #ce422b; }
+.c-comment { color: #a0a6b1; font-style: italic; }
+.c-keyword  { color: var(--color-primary); }
 .c-type     { color: #e5c07b; }
 .c-fn       { color: #61afef; }
 .c-string   { color: #98c379; }
@@ -141,4 +141,29 @@ body {
 
 .scroll-indicator {
   animation: fadeInUp 1s ease 1s both;
+}
+
+/* Shared interaction and responsive foundations. */
+html { color-scheme: dark; scroll-padding-top: 8rem; }
+section { scroll-margin-top: 1rem; }
+:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 4px; }
+a { text-underline-offset: 0.2em; }
+button, .btn-primary, .btn-outline { min-height: 44px; }
+.btn-outline { border-color: var(--color-primary); }
+.grid > *, .flex > * { min-width: 0; }
+h1, h2, h3 { overflow-wrap: anywhere; }
+pre { max-width: 100%; scrollbar-width: thin; }
+.skip-link { position: fixed; top: 0.5rem; left: 1rem; z-index: 100; padding: 0.75rem 1rem; background: var(--color-text); color: var(--color-bg); transform: translateY(-160%); }
+.skip-link:focus { transform: translateY(0); }
+footer { padding-bottom: 6rem; }
+@media (max-width: 639px) {
+  #hero { min-height: auto; }
+  #hero > .grid { padding-top: 2.5rem; padding-bottom: 3rem; }
+  .scroll-indicator { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .cursor-blink, .scroll-line, .scroll-indicator, .radio-dot { animation: none !important; }
+  .skill-fill { animation: none; width: var(--target); }
+  a, button, article, .codetime-card { transition: none !important; transform: none !important; }
 }

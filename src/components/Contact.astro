@@ -34,7 +34,7 @@ const infos: ContactInfo[] = [
 
     <SectionHeading title={t.title}>
       <Fragment slot="prefix">
-        <span class="text-[#ce422b]">pub fn</span>
+        <span class="text-primary">pub fn</span>
         <span class="text-[#61afef]"> get_in_touch</span><span class="text-[#909090]">()</span>
       </Fragment>
     </SectionHeading>
@@ -46,11 +46,11 @@ const infos: ContactInfo[] = [
         <div class="flex flex-col gap-3">
           {infos.map(info => (
             <div class="flex items-center gap-4 bg-[#1a1a1a] border border-[rgba(206,66,43,0.3)] rounded p-4">
-              <span class="text-[#ce422b] shrink-0" set:html={info.icon} />
-              <div>
-                <p class="font-mono text-[0.6875rem] text-[#5c6370] uppercase tracking-wider mb-0.5">{info.label}</p>
+              <span class="text-primary shrink-0" set:html={info.icon} />
+              <div class="min-w-0">
+                <p class="font-mono text-[0.6875rem] text-[#a0a6b1] uppercase tracking-wider mb-0.5">{info.label}</p>
                 {info.href ? (
-                  <a href={info.href} class={`font-mono text-sm hover:text-[#ce422b] transition-colors ${info.muted ? 'text-[#909090]' : 'text-[#f0f0f0]'}`}>
+                  <a href={info.href} class={`break-all font-mono text-sm hover:text-primary transition-colors ${info.muted ? 'text-[#909090]' : 'text-[#f0f0f0]'}`}>
                     {info.value}
                   </a>
                 ) : (
@@ -83,13 +83,13 @@ const infos: ContactInfo[] = [
     <span class="c-keyword">let</span> contact <span class="c-punct">=</span> Contact <span class="c-bracket">{</span>
         email<span class="c-punct">:</span>    <span class="c-string">"{site.email}"</span><span class="c-punct">,</span>
         telegram<span class="c-punct">:</span> <span class="c-string">"{site.telegramHandle}"</span><span class="c-punct">,</span>
-        location<span class="c-punct">:</span> <span class="c-string">"{site.location}"</span><span class="c-punct">,</span>
+        location<span class="c-punct">:</span> <span class="c-string">"{t.location}"</span><span class="c-punct">,</span>
         status<span class="c-punct">:</span>   <span class="c-type">Status</span><span class="c-punct">::</span><span class="c-type">NotLooking</span><span class="c-punct">,</span>
     <span class="c-bracket">}</span><span class="c-punct">;</span>
 
-    <span class="c-comment">// Feel free to reach out!</span>
+    <span class="c-comment">// {t.title === 'Контакты' ? 'Можно просто написать' : 'Feel free to reach out!'}</span>
     contact<span class="c-punct">.</span><span class="c-fn">send_message</span><span class="c-bracket">(</span>
-        <span class="c-string">"Let's build something great"</span>
+        <span class="c-string">"{t.title === 'Контакты' ? 'Создадим что-нибудь вместе' : "Let's build something great"}"</span>
     <span class="c-bracket">)</span><span class="c-punct">;</span>
 <span class="c-bracket">}</span></code></pre>
       </div>

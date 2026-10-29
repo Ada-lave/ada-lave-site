@@ -42,7 +42,8 @@ const umamiWebsiteId  = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
     )}
   </head>
   <body>
+    <a class="skip-link" href="#main">{lang === 'ru' ? 'К содержимому' : 'Skip to content'}</a>
     <slot />
-    <RadioPlayer />
+    <RadioPlayer lang={lang} />
   </body>
 </html>

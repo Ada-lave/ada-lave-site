@@ -77,27 +77,28 @@ const panelHtml: Record<string, string> = {
 
     <SectionHeading title={t.title}>
       <Fragment slot="prefix">
-        <span class="text-[#ce422b]">use</span>
+        <span class="text-primary">use</span>
         <span> crate</span><span class="text-[#909090]">::</span><span class="text-[#e5c07b]">skills</span><span>;</span>
       </Fragment>
     </SectionHeading>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
+    <div class="grid grid-cols-1 lg:grid-cols-[1.35fr_1fr] gap-10 lg:gap-12">
 
+      <p class="text-sm text-[#909090] lg:col-span-2">{t.title === 'Навыки' ? 'Самооценка опыта работы с технологиями.' : 'Self-assessed experience with each technology.'}</p>
       <!-- Skill bars -->
-      <div class="flex flex-col gap-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
         {t.groups.map(group => (
           <div class="flex flex-col gap-3">
-            <h3 class="font-mono text-sm text-[#5c6370] italic">{group.label}</h3>
+            <h3 class="font-mono text-sm text-[#a0a6b1] italic">{group.label}</h3>
             <div class="flex flex-col gap-2.5">
               {group.skills.map(skill => (
                 <div>
-                  <div class="flex justify-between mb-1">
+                  <div class="flex justify-between gap-3 mb-1">
                     <span class="font-mono text-[0.8125rem] text-[#f0f0f0]">{skill.name}</span>
-                    <span class="font-mono text-[0.75rem] text-[#ce422b]">{skill.level}%</span>
+                    <span class="font-mono text-[0.75rem] text-primary">{skill.level}%</span>
                   </div>
                   <div class="h-1 bg-[#252525] rounded-full overflow-hidden">
-                    <div class="skill-fill" style={`--target: ${skill.level}%`}></div>
+                    <div role="meter" aria-label={skill.name} aria-valuemin="0" aria-valuemax="100" aria-valuenow={skill.level} class="skill-fill" style={`--target: ${skill.level}%`}></div>
                   </div>
                 </div>
               ))}
@@ -108,7 +109,7 @@ const panelHtml: Record<string, string> = {
 
       <!-- Config panel -->
       <div class="self-start bg-[#1a1a1a] border border-[rgba(206,66,43,0.3)] rounded overflow-hidden">
-        <div class="flex border-b border-[rgba(206,66,43,0.3)] bg-[#252525]" id="cfg-tabs">
+        <div class="flex border-b border-[rgba(206,66,43,0.3)] bg-[#252525]" id="cfg-tabs" aria-label={t.title === 'Навыки' ? 'Конфигурация стека' : 'Stack configuration'}>
           {configTabs.map((tab, i) => (
             <button
               data-file={tab.id}
@@ -137,7 +138,7 @@ const panelHtml: Record<string, string> = {
 
 <style>
   .active-cfg {
-    color: #ce422b;
+    color: var(--color-primary);
     background: rgba(206, 66, 43, 0.08);
   }
 </style>
@@ -159,6 +160,7 @@ const panelHtml: Record<string, string> = {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         (entry.target as HTMLElement).style.animationPlayState = 'running';
+        observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.2 });

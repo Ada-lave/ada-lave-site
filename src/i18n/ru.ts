@@ -2,12 +2,12 @@ import { site } from '../data/config';
 import type { Translations } from './types';
 
 const codeTag = (text: string) =>
-  `<code class="font-mono text-[0.875em] text-[#ce422b] bg-[rgba(206,66,43,0.1)] px-1.5 py-0.5 rounded-sm">${text}</code>`;
+  `<code class="font-mono text-[0.875em] text-primary bg-[rgba(206,66,43,0.1)] px-1.5 py-0.5 rounded-sm">${text}</code>`;
 
 export const ru: Translations = {
   lang: 'ru',
   langSwitch: 'EN',
-  langSwitchHref: '/en',
+  langSwitchHref: '/en?lang=en',
 
   meta: {
     title: 'Vladislav Shuvalov — Software Engineer',
@@ -15,26 +15,26 @@ export const ru: Translations = {
   },
 
   nav: [
-    { href: '#about', label: 'about' },
-    { href: '#skills', label: 'skills' },
-    { href: '#projects', label: 'projects' },
-    { href: '#contact', label: 'contact' },
+    { href: '#about', label: 'о себе' },
+    { href: '#skills', label: 'навыки' },
+    { href: '#projects', label: 'проекты' },
+    { href: '#contact', label: 'связь' },
   ],
 
   hero: {
-    subtitle: 'Software Engineer.<br />Crafting reliable systems in',
+    subtitle: 'Backend-разработчик.<br />Создаю надёжные системы на',
     ctaProjects: 'Проекты',
     ctaContact: 'Связаться',
-    scroll: 'scroll',
+    scroll: 'ниже',
   },
 
   about: {
     title: 'О себе',
-    p1Html: `Работают над backend-сервисами и системами. Мой подход — выбирать правильный инструмент под задачу:
+    p1Html: `Работаю над backend-сервисами и системами. Мой подход — выбирать правильный инструмент под задачу:
       ${codeTag('Go')} для конкурентных микросервисов,
       ${codeTag('Rust')} там, где важна производительность и безопасность памяти,
       ${codeTag('Python')} для прототипирования и автоматизации.`,
-    p2: 'Ценю простоту архитектуры, читаемость кода. Фанатею по Rust, AI local и self-hosted.',
+    p2: 'Ценю простоту архитектуры, читаемость кода. Фанатею по Rust, локальному AI и self-hosting.',
     traits: [
       {
         icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>`,
@@ -51,13 +51,13 @@ export const ru: Translations = {
       {
         icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>`,
         title: 'Прагматизм',
-        desc: 'Выбираю простые решения, которые работают сейчас и желательно, что бы не сломались когда-то потом ;)',
+        desc: 'Выбираю простые решения, которые работают сейчас и желательно, чтобы не сломались когда-то потом ;)',
         code: '// YAGNI & KISS',
       },
       {
         icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>`,
         title: 'Open Source',
-        desc: 'Обожаю open source и self-hosted, собвестенно и сам стараюсь поддерживать проекты.',
+        desc: 'Обожаю open source и self-hosted, собственно и сам стараюсь поддерживать проекты.',
         code: '// open source',
       },
     ],
@@ -135,7 +135,7 @@ export const ru: Translations = {
       {
         num: '01',
         title: 'Vibe',
-        description: 'Сервис транскрибации и суммаризации аудио',
+        description: 'Сервис транскрибирования и суммаризации аудио',
         tags: ['Rust', 'cpal', 'desktop', 'AI', 'local'],
         github: 'https://github.com/thewh1teagle/vibe',
         accent: '#ce422b',
@@ -161,6 +161,6 @@ export const ru: Translations = {
   },
 
   footer: {
-    builtWith: 'Built with Astro & Tailwind. Deployed using Dokku.',
+    builtWith: 'Создано на Astro и Tailwind. Развёрнуто на Dokku.',
   },
 };

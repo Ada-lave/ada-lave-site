@@ -12,27 +12,22 @@ const { t } = Astro.props;
 
     <!-- Left -->
     <div>
-      <!-- Terminal badge -->
-      <div class="inline-flex items-center gap-1 font-mono text-sm text-[#ce422b] bg-[rgba(206,66,43,0.08)] border border-[rgba(206,66,43,0.3)] rounded px-2.5 py-1 mb-6">
-        <span>&gt;</span>
-        <span class="cursor-blink">_</span>
-      </div>
-
       <!-- Heading -->
-      <h1 class="font-mono text-4xl xl:text-5xl font-semibold leading-tight mb-5">
-        <span class="text-[#ce422b]">let</span>
+      <h1 class="text-3xl xl:text-4xl font-semibold leading-tight mb-5">{site.name}</h1>
+      <p aria-hidden="true" class="font-mono text-2xl xl:text-3xl font-semibold leading-tight mb-5">
+        <span class="text-primary">let</span>
         <span class="text-[#f0f0f0]"> dev </span>
         <span class="text-[#909090]">=</span>
         <br />
         <span class="text-[#e5c07b]">Developer</span><span class="text-[#909090]">::</span><span class="text-[#61afef]">new</span><span class="text-[#909090]">();</span>
-      </h1>
+      </p>
 
       <!-- Subtitle -->
       <p class="text-[#909090] text-base leading-relaxed mb-8">
         <Fragment set:html={t.subtitle} /><br />
         {site.stack.map((lang, i) => (
           <>
-            <span class="text-[#ce422b] font-mono">{lang}</span>{i < site.stack.length - 1 ? (i === site.stack.length - 2 ? ' & ' : ', ') : '.'}
+            <span class="text-primary font-mono">{lang}</span>{i < site.stack.length - 1 ? (i === site.stack.length - 2 ? ' & ' : ', ') : '.'}
           </>
         ))}
       </p>
@@ -47,12 +42,12 @@ const { t } = Astro.props;
       </div>
 
       <!-- Socials -->
-      <div class="flex flex-wrap gap-5">
+      <div class="flex flex-wrap gap-x-5 gap-y-1 hero-socials">
         {socials.map(s => (
           <a href={s.href}
              target={s.href.startsWith('mailto:') ? undefined : '_blank'}
              rel={s.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-             class="flex items-center gap-1.5 font-mono text-[0.8125rem] text-[#909090] hover:text-[#ce422b] transition-colors"
+             class="min-h-11 flex items-center gap-1.5 font-mono text-[0.8125rem] text-[#909090] hover:text-primary transition-colors"
              data-umami-event={`social-${s.label.toLowerCase()}`}>
             <span set:html={s.icon} />
             {s.label}
@@ -69,29 +64,30 @@ const { t } = Astro.props;
         aria-label="CodeTime badge"
       >
         <span class="codetime-label">
-          <span class="text-[#ce422b]">$</span>
+          <span class="text-primary">$</span>
           codetime
         </span>
         <img
           src={site.codetimeBadge}
           alt="CodeTime badge"
           loading="lazy"
+          width="240" height="32"
           class="codetime-image"
         />
       </a>
     </div>
 
     <!-- Right: Terminal window -->
-    <div class="lg:order-none order-first">
+    <div class="min-w-0">
       <div class="bg-[#1a1a1a] border border-[rgba(206,66,43,0.3)] rounded-lg overflow-hidden shadow-2xl">
         <!-- Titlebar -->
-        <div class="flex items-center gap-3 px-4 py-2.5 bg-[#252525] border-b border-[rgba(206,66,43,0.3)]">
+        <div class="flex items-center gap-3 px-3 py-2.5 bg-[#252525] border-b border-[rgba(206,66,43,0.3)]">
           <div class="flex gap-1.5">
             <span class="w-3 h-3 rounded-full bg-[#ff5f57]"></span>
             <span class="w-3 h-3 rounded-full bg-[#febc2e]"></span>
             <span class="w-3 h-3 rounded-full bg-[#28c840]"></span>
           </div>
-          <div class="flex gap-1" id="hero-tabs">
+          <div class="flex gap-1" id="hero-tabs" aria-label={t.ctaProjects === 'Проекты' ? 'Язык примера кода' : 'Code language'}>
             <button data-lang="rust" class="tab-btn active-tab px-3 py-1 font-mono text-xs rounded-sm border border-transparent cursor-pointer transition-all">main.rs</button>
             <button data-lang="go"   class="tab-btn px-3 py-1 font-mono text-xs rounded-sm border border-transparent cursor-pointer transition-all text-[#909090] hover:text-[#f0f0f0] hover:border-[rgba(206,66,43,0.3)]">main.go</button>
             <button data-lang="python" class="tab-btn px-3 py-1 font-mono text-xs rounded-sm border border-transparent cursor-pointer transition-all text-[#909090] hover:text-[#f0f0f0] hover:border-[rgba(206,66,43,0.3)]">main.py</button>
@@ -172,7 +168,7 @@ const { t } = Astro.props;
 
           <!-- Status bar -->
           <div class="flex justify-between pt-3 mt-3 border-t border-white/5">
-            <span id="hero-status-lang" class="font-mono text-[0.6875rem] text-[#ce422b] uppercase tracking-wider">rust</span>
+            <span id="hero-status-lang" class="font-mono text-[0.6875rem] text-primary uppercase tracking-wider">rust</span>
             <span class="font-mono text-[0.6875rem] text-[#909090] uppercase tracking-wider">UTF-8</span>
           </div>
         </div>
@@ -189,7 +185,7 @@ const { t } = Astro.props;
 
 <style>
   .active-tab {
-    color: #ce422b;
+    color: var(--color-primary);
     background: rgba(206, 66, 43, 0.1);
     border-color: rgba(206, 66, 43, 0.3) !important;
   }
@@ -237,8 +233,11 @@ const { t } = Astro.props;
 
   .codetime-image {
     display: block;
-    width: auto;
+    width: 240px;
+    max-width: 100%;
     height: 2rem;
+    object-fit: contain;
+    object-position: left;
     filter: saturate(0.9) contrast(1.02);
     opacity: 0.92;
     transition:
@@ -254,6 +253,13 @@ const { t } = Astro.props;
 
 <script>
   import { initTabs } from '../scripts/tabs';
+
+  const badge = document.querySelector<HTMLImageElement>('.codetime-image');
+  if (badge) {
+    const hideFailedBadge = () => { badge.hidden = true; badge.style.display = 'none'; };
+    badge.addEventListener('error', hideFailedBadge);
+    if (badge.complete && !badge.naturalWidth) hideFailedBadge();
+  }
 
   initTabs({
     tabsSelector: '#hero-tabs .tab-btn',

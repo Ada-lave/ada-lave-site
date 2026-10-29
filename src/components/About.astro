@@ -12,7 +12,7 @@ const { t } = Astro.props;
 
     <SectionHeading title={t.title}>
       <Fragment slot="prefix">
-        <span class="text-[#ce422b]">impl</span>
+        <span class="text-primary">impl</span>
         <span class="text-[#e5c07b]"> Developer</span>
         <span> &#123;</span>
       </Fragment>
@@ -27,18 +27,17 @@ const { t } = Astro.props;
       </div>
 
       <!-- Trait cards -->
-      <div class="grid grid-cols-2 gap-3">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {t.traits.map(tr => (
-          <div class="bg-[#1a1a1a] border border-[rgba(206,66,43,0.3)] rounded p-4 flex flex-col gap-2 hover:border-[#ce422b] hover:-translate-y-0.5 transition-all">
-            <div class="text-[#ce422b]" set:html={tr.icon} />
+          <div class="bg-[#1a1a1a] border border-[rgba(206,66,43,0.3)] rounded p-4 flex flex-col gap-2 hover:border-[#ce422b] transition-all">
+            <div class="text-primary" set:html={tr.icon} />
             <h3 class="text-[0.9375rem] font-semibold">{tr.title}</h3>
             <p class="text-[0.8125rem] text-[#909090] leading-snug">{tr.desc}</p>
-            <span class="font-mono text-[0.75rem] text-[#5c6370] italic">{tr.code}</span>
+            <span class="font-mono text-[0.75rem] text-[#a0a6b1] italic">{tr.code}</span>
           </div>
         ))}
       </div>
     </div>
 
-    <p class="font-mono text-[#909090] text-lg">&#125;</p>
   </div>
 </section>

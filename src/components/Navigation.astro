@@ -1,0 +1,32 @@
+---
+import { site } from '../data/config';
+import type { Translations } from '../i18n/types';
+const { t } = Astro.props as { t: Translations };
+---
+<nav aria-label={t.lang === 'ru' ? 'Основная навигация' : 'Main navigation'} class="site-nav">
+  <div class="nav-inner">
+    <a href="#hero" class="brand"><span>vs</span>_shuvalov</a>
+    <div class="nav-actions">
+      <a href={t.langSwitchHref} lang={t.lang === 'ru' ? 'en' : 'ru'} hreflang={t.lang === 'ru' ? 'en' : 'ru'} aria-label={t.lang === 'ru' ? 'Switch to English' : 'Переключить на русский'} data-umami-event="nav-lang-switch">{t.langSwitch}</a>
+      <a href={site.github} target="_blank" rel="noopener noreferrer" data-umami-event="nav-github">GitHub ↗</a>
+    </div>
+    <div class="nav-sections">
+      {t.nav.map(link => <a href={link.href}>./{link.label}</a>)}
+    </div>
+  </div>
+</nav>
+<style>
+  .site-nav { position: sticky; top: 0; z-index: 40; background: var(--color-bg); border-bottom: 1px solid var(--color-border); }
+  .nav-inner { max-width: 72rem; margin: auto; padding: 0 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 1rem; font-family: var(--font-mono); font-size: 0.75rem; }
+  a { display: inline-flex; align-items: center; min-height: 44px; color: var(--color-text-muted); text-decoration: none; }
+  a:hover { color: var(--color-primary); }
+  .brand { font-size: 0.875rem; font-weight: 600; color: var(--color-text); }
+  .brand span { color: var(--color-primary); }
+  .nav-actions { display: flex; gap: 1rem; }
+  .nav-sections { order: 3; width: 100%; display: flex; justify-content: space-between; gap: 0.5rem; border-top: 1px solid var(--color-muted); }
+  @media (min-width: 768px) {
+    .nav-inner { min-height: 56px; flex-wrap: nowrap; }
+    .nav-sections { order: 0; width: auto; gap: 1.5rem; border: 0; }
+    .nav-actions { order: 3; }
+  }
+</style>

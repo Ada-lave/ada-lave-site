@@ -1,77 +1,95 @@
 ---
-// Lo-fi radio — floating player
-const STREAM = 'https://stream.laut.fm/lofi';
+import type { Lang } from '../i18n/types';
+const { lang = 'ru' } = Astro.props as { lang?: Lang };
+const ru = lang === 'ru';
+const labels = {
+  play: ru ? 'Включить lo-fi радио' : 'Play lo-fi radio',
+  stop: ru ? 'Выключить lo-fi радио' : 'Stop lo-fi radio',
+  loading: ru ? 'Подключение… Нажмите для отмены' : 'Connecting… Click to cancel',
+  error: ru ? 'Радио недоступно. Нажмите, чтобы повторить.' : 'Radio unavailable. Click to retry.',
+  playing: ru ? 'Играет lo-fi радио' : 'Playing lo-fi radio',
+};
 ---
-
-<div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
-
-  <!-- "now playing" label -->
-  <div id="radio-label"
-       class="hidden items-center gap-1.5 font-mono text-[0.6875rem] text-[#ce422b]
-              bg-[#1a1a1a] border border-[rgba(206,66,43,0.3)] rounded px-2.5 py-1">
-    <span class="radio-dot w-1.5 h-1.5 rounded-full bg-[#ce422b]"></span>
-    lo-fi radio
-  </div>
-
-  <!-- play / pause button -->
-  <button id="radio-btn"
-          aria-label="Play lo-fi radio"
-          data-umami-event="radio-toggle"
-          class="w-11 h-11 flex items-center justify-center rounded-full
-                 bg-[#1a1a1a] border border-[rgba(206,66,43,0.3)]
-                 text-[#909090] hover:text-[#ce422b] hover:border-[#ce422b]
-                 transition-all shadow-lg">
-    <!-- play icon -->
-    <svg id="icon-play" width="16" height="16" viewBox="0 0 24 24"
-         fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-    <!-- pause icon (hidden) -->
-    <svg id="icon-pause" width="16" height="16" viewBox="0 0 24 24"
-         fill="currentColor" class="hidden">
-      <rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>
-    </svg>
+<div class="radio-player" data-labels={JSON.stringify(labels)}>
+  <p id="radio-label" role="status" aria-live="polite" class="hidden"></p>
+  <button id="radio-btn" type="button" aria-label={labels.play} aria-pressed="false" title={labels.play} data-umami-event="radio-toggle">
+    <svg id="icon-play" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3 19 12 5 21Z"/></svg>
+    <svg id="icon-pause" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="hidden"><path d="M6 4h4v16H6zm8 0h4v16h-4z"/></svg>
   </button>
-
 </div>
-
-<audio id="radio-audio" preload="none" src={STREAM} data-src={STREAM}></audio>
-
+<audio id="radio-audio" preload="none" data-src="https://stream.laut.fm/lofi"></audio>
 <style>
-  .radio-dot {
-    animation: pulse-dot 1.4s ease-in-out infinite;
-  }
-  @keyframes pulse-dot {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0.3; }
-  }
+  .radio-player { position: fixed; bottom: max(1rem, env(safe-area-inset-bottom)); right: 1rem; z-index: 30; display: flex; align-items: flex-end; flex-direction: column; gap: 0.5rem; }
+  #radio-btn { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; color: var(--color-text); background: var(--color-card); border: 1px solid var(--color-border); cursor: pointer; }
+  #radio-btn:hover, #radio-btn[aria-pressed="true"] { color: var(--color-primary); border-color: var(--color-primary); }
+  #radio-label { max-width: min(18rem, calc(100vw - 2rem)); padding: 0.625rem 0.75rem; font-size: 0.8125rem; color: var(--color-text); background: var(--color-card); border: 1px solid var(--color-border); border-radius: 4px; }
 </style>
-
 <script>
-  const audio   = document.getElementById('radio-audio')  as HTMLAudioElement;
-  const btn     = document.getElementById('radio-btn')!;
-  const label   = document.getElementById('radio-label')!;
-  const iconPlay  = document.getElementById('icon-play')!;
-  const iconPause = document.getElementById('icon-pause')!;
+  const player = document.querySelector<HTMLElement>('.radio-player')!;
+  const labels = JSON.parse(player.dataset.labels!);
+  const audio = document.getElementById('radio-audio') as HTMLAudioElement;
+  const button = document.getElementById('radio-btn')!;
+  const label = document.getElementById('radio-label')!;
+  const playIcon = document.getElementById('icon-play')!;
+  const stopIcon = document.getElementById('icon-pause')!;
+  let state: 'idle' | 'loading' | 'playing' | 'error' = 'idle';
+  let timeout: ReturnType<typeof setTimeout> | undefined;
+  let request = 0;
 
-  let playing = false;
-
-  btn.addEventListener('click', () => {
-    if (playing) {
-      audio.pause();
-      audio.src = '';          // освобождаем буфер
-      setPlaying(false);
-    } else {
-      audio.src = audio.dataset.src!;
-      audio.play().catch(() => setPlaying(false));
-      setPlaying(true);
-    }
-  });
-
-  function setPlaying(state: boolean) {
-    playing = state;
-    iconPlay.classList.toggle('hidden', state);
-    iconPause.classList.toggle('hidden', !state);
-    label.classList.toggle('hidden', !state);
-    label.classList.toggle('flex', state);
-    btn.setAttribute('aria-label', state ? 'Pause lo-fi radio' : 'Play lo-fi radio');
+  function setState(next: typeof state) {
+    state = next;
+    const active = next === 'playing' || next === 'loading';
+    button.setAttribute('aria-pressed', String(active));
+    button.setAttribute('aria-busy', String(next === 'loading'));
+    const text = next === 'playing' ? labels.stop : next === 'loading' ? labels.loading : labels.play;
+    button.setAttribute('aria-label', text);
+    button.setAttribute('title', text);
+    playIcon.classList.toggle('hidden', active);
+    stopIcon.classList.toggle('hidden', !active);
+    label.textContent = next === 'idle' ? '' : labels[next];
+    label.classList.toggle('hidden', next === 'idle');
   }
+  function release() {
+    clearTimeout(timeout);
+    audio.pause();
+    audio.removeAttribute('src');
+    audio.load();
+  }
+  function fail() {
+    if (state !== 'loading' && state !== 'playing') return;
+    request++;
+    setState('error');
+    release();
+  }
+  button.addEventListener('click', () => {
+    request++;
+    if (state === 'playing' || state === 'loading') {
+      setState('idle');
+      release();
+      return;
+    }
+    const current = request;
+    setState('loading');
+    audio.src = audio.dataset.src!;
+    timeout = setTimeout(fail, 15000);
+    audio.play().catch(() => { if (current === request) fail(); });
+  });
+  audio.addEventListener('playing', () => {
+    if (state !== 'loading') return;
+    clearTimeout(timeout);
+    setState('playing');
+  });
+  audio.addEventListener('waiting', () => {
+    if (state !== 'playing') return;
+    setState('loading');
+    timeout = setTimeout(fail, 15000);
+  });
+  audio.addEventListener('error', fail);
+  audio.addEventListener('ended', fail);
+  audio.addEventListener('pause', () => {
+    if (state !== 'playing') return;
+    request++;
+    setState('idle');
+    release();
+  });
 </script>
